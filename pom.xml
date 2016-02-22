@@ -37,6 +37,12 @@
 			<artifactId>sqljdbc4</artifactId>
 			<version>4.0</version>
 		</dependency>
+		<!-- Support for Java8 Time for Hibernate -->
+		<dependency>
+			<groupId>org.jadira.usertype</groupId>
+			<artifactId>usertype.extended</artifactId>
+			<version>5.0.0.GA</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
