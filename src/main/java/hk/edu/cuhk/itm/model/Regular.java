@@ -5,11 +5,7 @@ package hk.edu.cuhk.itm.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Lee
@@ -17,25 +13,26 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Regular")
+@IdClass(RegularCompositeId.class)
 public class Regular implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String Tourcode;
+    private String tourCode;
+	@Id
     private int busId;
-    private int diverPId;
+    private int driverPID;
     private String departLocation;
     private int noOfParticipants;
 	/**
-	 * @return the tourcode
+	 * @return the tourCode
 	 */
-	public String getTourcode() {
-		return Tourcode;
+	public String getTourCode() {
+		return tourCode;
 	}
 	/**
-	 * @param tourcode the tourcode to set
+	 * @param tourCode the tourCode to set
 	 */
-	public void setTourcode(String tourcode) {
-		Tourcode = tourcode;
+	public void setTourCode(String tourCode) {
+		this.tourCode = tourCode;
 	}
 	/**
 	 * @return the busId
@@ -50,16 +47,16 @@ public class Regular implements Serializable {
 		this.busId = busId;
 	}
 	/**
-	 * @return the diverPId
+	 * @return the driverPID
 	 */
-	public int getDiverPId() {
-		return diverPId;
+	public int getDriverPID() {
+		return driverPID;
 	}
 	/**
-	 * @param diverPId the diverPId to set
+	 * @param driverPID the driverPID to set
 	 */
-	public void setDiverPId(int diverPId) {
-		this.diverPId = diverPId;
+	public void setDriverPID(int driverPID) {
+		this.driverPID = driverPID;
 	}
 	/**
 	 * @return the departLocation

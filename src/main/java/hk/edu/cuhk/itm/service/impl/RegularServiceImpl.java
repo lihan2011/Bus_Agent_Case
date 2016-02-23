@@ -6,6 +6,7 @@ package hk.edu.cuhk.itm.service.impl;
 import java.util.List;
 
 import hk.edu.cuhk.itm.model.Regular;
+import hk.edu.cuhk.itm.model.RegularCompositeId;
 import hk.edu.cuhk.itm.repository.RegularRepository;
 import hk.edu.cuhk.itm.service.RegularService;
 
@@ -37,10 +38,20 @@ public class RegularServiceImpl implements RegularService{
 	 * @see hk.edu.cuhk.itm.service.RegularService#getRegularByDestination(java.lang.String)
 	 */
 	@Override
-	public List<Regular> getRegularByTourCode(int  tourcode) {
+	public List<Regular> getRegularByTourCode(String tourCode) {
 		// TODO Auto-generated method stub
-		return regularRepository.findByTourCode(tourcode);
+		return regularRepository.findByTourCode(tourCode);
 	}
-	
+
+	@Override
+	public List<Regular> getRegularByBusId(int busId) {
+		return regularRepository.findByBusId(busId);
+	}
+
+	@Override
+	public List<Regular> getRegularByCompositeId(String tourCode, int busId) {
+		return regularRepository.findByTourCodeAndBusId(tourCode, busId);
+	}
+
 
 }

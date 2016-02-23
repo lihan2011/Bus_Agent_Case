@@ -7,6 +7,7 @@ import java.util.List;
 
 import hk.edu.cuhk.itm.model.Regular;
 
+import hk.edu.cuhk.itm.model.RegularCompositeId;
 import org.springframework.data.repository.Repository;
 
 
@@ -16,8 +17,9 @@ import org.springframework.data.repository.Repository;
  *
  */
 @org.springframework.stereotype.Repository
-public interface RegularRepository extends Repository<Regular,Integer>{
+public interface RegularRepository extends Repository<Regular, RegularCompositeId>{
 	List<Regular> findAll();
-	List<Regular> findByTourCode(int tourcode);
-
+	List<Regular> findByTourCode(String tourCode);
+	List<Regular> findByBusId(int busId);
+	List<Regular> findByTourCodeAndBusId(String tourCode, int busId);
 }

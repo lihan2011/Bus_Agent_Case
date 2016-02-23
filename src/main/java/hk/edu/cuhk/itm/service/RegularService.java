@@ -3,6 +3,7 @@
  */
 package hk.edu.cuhk.itm.service;
 import hk.edu.cuhk.itm.model.Regular;
+import hk.edu.cuhk.itm.model.RegularCompositeId;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  */
 public interface RegularService {
 	List<Regular> getAllRegular();
-	List<Regular> getRegularByTourCode(int tourcode);
-
+	List<Regular> getRegularByTourCode(String tourCode);
+	List<Regular> getRegularByBusId(int busId);
+	List<Regular> getRegularByCompositeId(String tourCode, int busId);
 }
