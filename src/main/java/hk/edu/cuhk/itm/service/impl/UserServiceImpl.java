@@ -7,9 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Created by hzy on 22/2/2016.
- */
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -18,7 +15,7 @@ public class UserServiceImpl implements UserService {
     private AdministratorRepository administratorRepository;
 
     @Override
-    public Administrator get(long id) {
+    public Administrator get(int id) {
         return administratorRepository.findOne(id);
     }
 }

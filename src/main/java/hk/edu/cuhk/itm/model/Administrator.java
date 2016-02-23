@@ -3,16 +3,13 @@ package hk.edu.cuhk.itm.model;
 import javax.persistence.*;
 import java.io.Serializable;
 
-/**
- * Created by hzy on 22/2/2016.
- */
 @Entity
 @Table(name = "Administrator")
 public class Administrator implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private int id;
     private String name;
     private String password;
     private String gender;
@@ -22,7 +19,7 @@ public class Administrator implements Serializable {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
