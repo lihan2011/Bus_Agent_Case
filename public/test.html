@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>search regular</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+</head>
+<body>
+<div id="container">
+<p>please input destination</p><input id="destination" type="text"/>
+<p><input type="button" id="search" value="search"/></p>
+<div id="regular"></div>
+</div>
+<script type="text/javascript">
+	$("#search").click(function(){
+    var destination;
+    destination = $('#destination').val();
+  	$.ajax({
+  		type:"GET",
+  		url:"http://localhost:8080/api/bus/tourlisting",
+  		data:{
+  		 	"destination":destination
+  		 },
+  		dataType:"json",
+  		success: function(json){
+        //console.log(json);
+  			$.each(json, function(i,item){
+            findRegularByDestination(item);
+        });
+  		},
+      error: function(){
+        alert("fail");
+      }
+  	});
+});
+
+function findRegularByDestination(data){
+  //console.log(tourCode);
+  $.ajax({
+      type:"GET",
+      url:"http://localhost:8080/api/bus/regular",
+      data:{
+        "tourCode":data.tourCode
+       },
+      dataType:"json",
+      success: function(json){
+        console.log(json);
+        $.each(json, function(i,item){
+        $("#regular").append("<h1>departLocation:</h1>");
+        $("#regular").append("<h2>"+item.departLocation+"</h2>");
+        $("#regular").append("<h1>Num of p:</h1>");
+        $("#regular").append("<h2>"+item.noOfParticipants+"</h2>");
+        $("#regular").append("<h1>departTime</h1>");
+        $("#regular").append("<h2>"+analyseDate(data.departDate)+",  "+analyseTime(data.departTime)+"</h2>");
+        });
+      },
+      error: function(){
+        alert("fail");
+      }
+    });
+}
+
+function analyseDate(DT){
+  var date;
+    date="year:";
+    date+=DT.year;
+    date+=", month:";
+    date+=DT.month;
+    date+=", day:";
+    date+=DT.dayOfMonth;
+  return date;
+}
+function analyseTime(Time){
+   var date;
+    date=Time.hour;
+    date+=" : ";
+    date+=Time.minute;
+    date+=" : ";
+    date+=Time.second;
+  return date;
+  
+}
+</script>
+
+</body>
+</html>
