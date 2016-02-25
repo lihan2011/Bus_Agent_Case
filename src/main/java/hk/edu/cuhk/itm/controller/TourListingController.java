@@ -10,6 +10,8 @@ import hk.edu.cuhk.itm.model.TourListing;
 import hk.edu.cuhk.itm.service.TourListingService;
 
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author Lee
@@ -23,9 +25,20 @@ public class TourListingController {
 	
 	
 	@RequestMapping(value = "tourlisting", method = {RequestMethod.GET},produces = {"application/json"})
-	public List<TourListing> getTourListing(@RequestParam(name = "destination", required = false) String destination){
-		if(destination != null){
+	public List<TourListing> getTourListing(@RequestParam(name = "destination", required = false) String destination,@RequestParam(name = "departdate", required = false) String departdate){
+		final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDate departDate = null;
+		if(departdate != null) departDate = LocalDate.parse(departdate,DATE_FORMAT);
+
+		
+		if(destination != null&&departDate != null){
+			return tourListingService.findByDestinationAndDepartDate(destination, departDate);
+		}
+		else if(destination !=null){
 			return tourListingService.findByDestination(destination);
+		}
+		else if(departDate != null){
+			return tourListingService.findByDepartDate(departDate);
 		}
 		else {
 			return tourListingService.findAll();

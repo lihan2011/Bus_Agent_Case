@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import hk.edu.cuhk.itm.model.TourListing;
 import hk.edu.cuhk.itm.repository.TourListingRepository;
+import java.time.LocalDate;
 import hk.edu.cuhk.itm.service.TourListingService;
 
 /**
@@ -30,16 +31,30 @@ public class TourListingServiceImpl implements TourListingService{
 		return tourListingRepository.findAll();
 	}
 
-//	@Override
-//	public List<TourListing> findByTourCode(String tourCode) {
-//		// TODO Auto-generated method stub
-//		return tourListingRepository.findByTourCode(tourCode);
-//	}
+
 
 	@Override
 	public List<TourListing> findByDestination(String destination) {
 		// TODO Auto-generated method stub
 		return tourListingRepository.findByDestination(destination);
+	}
+
+
+
+	public List<TourListing> findByDepartDate(LocalDate departDate) {
+		// TODO Auto-generated method stub
+		return tourListingRepository.findByDepartDate(departDate);
+	}
+
+
+
+	
+
+
+
+	public List<TourListing> findByDestinationAndDepartDate(String destination,LocalDate departDate) {
+		// TODO Auto-generated method stub
+		return tourListingRepository.findByDestinationAndDepartDate(destination, departDate);
 	}
 
 }

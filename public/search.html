@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>search regular</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+  <style type="text/css">
+    .info {
+      width: 28em;
+    }
+    .main{
+      width: 30em;
+      padding-right: 10px;
+      float: left;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div class="main">
+      <h1>Regular Search</h1>
+      <p>please input destination</p><input id="destination_regluar" type="text"/>
+      <p>please input departTime(dd-mm-yyyy)</p><input id="date_regluar" type="text"/>
+      <p><input type="button" id="search_regular" value="search"/></p>
+      <div class="info" id="regular"></div>
+    </div>
+    <div class="main">
+     <h1>Sightseeing Search</h1>
+     <p>please input destination</p><input id="destination_sightseeing" type="text"/>
+     <p><input type="button" id="search_sightseeing" value="search"/></p>
+     <div class="info" id="sightseeing"></div>
+   </div>
+   <div class="main">
+     <h1>Private Search</h1>
+     <p>please input return date(dd-mm-yyyy)</p><input id="destination_private" type="text"/>
+     <p><input type="button" id="search_private" value="search"/></p>
+     <div class="info" id="private"></div>
+   </div>
+
+ </div>
+ <script type="text/javascript">
+   $("#search_regular").click(function(){
+    var destination;
+    destination = $('#destination_regluar').val();
+    var date;
+    date = $("#date_regluar").val();
+    $("#regular").empty();
+    $.ajax({
+      type:"GET",
+      url:"http://localhost:8080/api/bus/tourlisting",
+      data:{
+        "destination":destination
+        //"departdate":date
+      },
+      dataType:"json",
+      success: function(json){
+        $.each(json, function(i,item){
+          findByDestination(item,"regular");
+        });
+      },
+      error: function(){
+        alert("fail_tourlisting");
+      }
+    });
+  });
+
+   $("#search_sightseeing").click(function(){
+    var destination;
+    destination = $('#destination_sightseeing').val();
+    $("#sightseeing").empty();
+    $.ajax({
+      type:"GET",
+      url:"http://localhost:8080/api/bus/tourlisting",
+      data:{
+        "destination":destination
+      },
+      dataType:"json",
+      success: function(json){
+        console.log(json);
+        $.each(json, function(i,item){
+          findByDestination(item,"sightseeing");
+        });
+      },
+      error: function(){
+        alert("fail_sighting");
+      }
+    });
+  });
+
+   $("#search_private").click(function(){
+    var destination;
+    destination = $('#destination_private').val();
+    $("#private").empty();
+    $.ajax({
+      type:"GET",
+      url:"http://localhost:8080/api/bus/tourlisting",
+      data:{
+        "destination":destination
+      },
+      dataType:"json",
+      success: function(json){
+        console.log(json);
+        $.each(json, function(i,item){
+          findByDestination(item,"private");
+        });
+      },
+      error: function(){
+        alert("fail_private");
+      }
+    });
+  });
+
+   function findByDestination(data,scheme){
+  //console.log(tourCode);
+  var url ="http://localhost:8080/api/bus/";
+  url +=scheme;
+  console.log(url);
+  console.log(data.tourCode);
+  $.ajax({
+    type:"GET",
+    url:url,
+    data:{
+      "tourCode":data.tourCode
+    },
+    dataType:"json",
+    success: function(json){
+      console.log(json);
+      $.each(json, function(i,item){
+        if(scheme=="regular") add_html_regular(data,item);
+        else if(scheme=="sightseeing") add_html_sightseeing(data,item);
+        else add_html_private(data,item);
+      });
+    },
+    error: function(){
+      alert("fail_regular");
+    }
+  });
+}
+
+function add_html_regular(data,item){
+  $("#regular").append("<h1>departLocation:</h1>");
+  $("#regular").append("<h3>"+item.departLocation+"</h3>");
+  $("#regular").append("<h1>Num of p:</h1>");
+  $("#regular").append("<h3>"+item.noOfParticipants+"</h3>");
+  $("#regular").append("<h1>departTime</h1>");
+  $("#regular").append("<h3>"+analyseDate(data.departDate)+",  "+analyseTime(data.departTime)+"</h3>");
+}
+
+function add_html_sightseeing(data,item){
+  $("sightseeing").append("<h1>departLocation:</h1>");
+  $("#sightseeing").append("<h3>"+item.departLocation+"</h3>");
+  $("#sightseeing").append("<h1>Num of p:</h1>");
+  $("#sightseeing").append("<h3>"+item.noOfParticipants+"</h3>");
+  $("#sightseeing").append("<h1>departTime</h1>");
+  $("#sightseeing").append("<h3>"+analyseDate(data.departDate)+",  "+analyseTime(data.departTime)+"</h3>");
+}
+
+function add_html_private(data,item){
+  $("private").append("<h1>departLocation:</h1>");
+  $("#private").append("<h3>"+item.departLocation+"</h3>");
+  $("#private").append("<h1>Num of p:</h1>");
+  $("#private").append("<h3>"+item.noOfParticipants+"</h3>");
+  $("#private").append("<h1>departTime</h1>");
+  $("#private").append("<h3>"+analyseDate(data.departDate)+",  "+analyseTime(data.departTime)+"</h3>");
+}
+
+
+
+function analyseDate(DT){
+  var date;
+  date="year:";
+  date+=DT.year;
+  date+=", month:";
+  date+=DT.month;
+  date+=", day:";
+  date+=DT.dayOfMonth;
+  return date;
+}
+function analyseTime(Time){
+ var date;
+ date=Time.hour;
+ date+=" : ";
+ date+=Time.minute;
+ date+=" : ";
+ date+=Time.second;
+ return date;
+
+}
+</script>
+
+</body>
+</html>
