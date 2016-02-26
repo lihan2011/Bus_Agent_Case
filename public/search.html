@@ -32,7 +32,7 @@
    </div>
    <div class="main">
      <h1>Private Search</h1>
-     <p>please input return date(dd-mm-yyyy)</p><input id="destination_private" type="text"/>
+     <p>please input destination</p><input id="destination_private" type="text"/>
      <p><input type="button" id="search_private" value="search"/></p>
      <div class="info" id="private"></div>
    </div>
@@ -49,8 +49,8 @@
       type:"GET",
       url:"http://localhost:8080/api/bus/tourlisting",
       data:{
-        "destination":destination
-        //"departdate":date
+        "destination":destination,
+        "departdate":date
       },
       dataType:"json",
       success: function(json){
@@ -72,7 +72,7 @@
       type:"GET",
       url:"http://localhost:8080/api/bus/tourlisting",
       data:{
-        "destination":destination
+        "destination":destination 
       },
       dataType:"json",
       success: function(json){
@@ -126,6 +126,7 @@
     success: function(json){
       console.log(json);
       $.each(json, function(i,item){
+        console.log(item.tourCode);
         if(scheme=="regular") add_html_regular(data,item);
         else if(scheme=="sightseeing") add_html_sightseeing(data,item);
         else add_html_private(data,item);
@@ -138,30 +139,44 @@
 }
 
 function add_html_regular(data,item){
+  //$("#regular").append(item.tourCode);
   $("#regular").append("<h1>departLocation:</h1>");
   $("#regular").append("<h3>"+item.departLocation+"</h3>");
   $("#regular").append("<h1>Num of p:</h1>");
   $("#regular").append("<h3>"+item.noOfParticipants+"</h3>");
   $("#regular").append("<h1>departTime</h1>");
   $("#regular").append("<h3>"+analyseDate(data.departDate)+",  "+analyseTime(data.departTime)+"</h3>");
+  $("#regular").append("<h1>Destination</h1>");
+  $("#regular").append("<h3>"+data.destination+"</h3>");
+  $("#regular").append("<h3>====================================================</h3>");
 }
 
 function add_html_sightseeing(data,item){
-  $("sightseeing").append("<h1>departLocation:</h1>");
+  //$("#sightseeing").append(item.tourCode);
+  $("#sightseeing").append("<h1>departLocation:</h1>");
   $("#sightseeing").append("<h3>"+item.departLocation+"</h3>");
   $("#sightseeing").append("<h1>Num of p:</h1>");
   $("#sightseeing").append("<h3>"+item.noOfParticipants+"</h3>");
   $("#sightseeing").append("<h1>departTime</h1>");
   $("#sightseeing").append("<h3>"+analyseDate(data.departDate)+",  "+analyseTime(data.departTime)+"</h3>");
+  $("#sightseeing").append("<h1>ReutrnTime</h1>");
+  $("#sightseeing").append("<h3>"+analyseDate(item.returnDate)+",  "+analyseTime(item.returnTime)+"</h3>");
+  $("#sightseeing").append("<h1>Destination</h1>");
+  $("#sightseeing").append("<h3>"+data.destination+"</h3>");
+  $("#sightseeing").append("<h3>====================================================</h3>");
 }
 
 function add_html_private(data,item){
-  $("private").append("<h1>departLocation:</h1>");
+  // $("#private").append(item.tourCode);
+  $("#private").append("<h1>departLocation:</h1>");
   $("#private").append("<h3>"+item.departLocation+"</h3>");
-  $("#private").append("<h1>Num of p:</h1>");
-  $("#private").append("<h3>"+item.noOfParticipants+"</h3>");
+  $("#private").append("<h1>ContactPerson:</h1>");
+  $("#private").append("<h3>"+item.contactPerson+"</h3>");
   $("#private").append("<h1>departTime</h1>");
   $("#private").append("<h3>"+analyseDate(data.departDate)+",  "+analyseTime(data.departTime)+"</h3>");
+  $("#private").append("<h1>Destination</h1>");
+  $("#private").append("<h3>"+data.destination+"</h3>");
+  $("#private").append("<h3>====================================================</h3>");
 }
 
 

@@ -6,7 +6,6 @@ package hk.edu.cuhk.itm.service.impl;
 import java.util.List;
 
 import hk.edu.cuhk.itm.model.PrivateBooking;
-import hk.edu.cuhk.itm.model.Sightseeing;
 import hk.edu.cuhk.itm.repository.PrivateBookingRepository;
 import hk.edu.cuhk.itm.service.PrivateBookingService;
 

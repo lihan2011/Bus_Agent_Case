@@ -30,15 +30,22 @@ public class SightseeingController {
 	public List<Sightseeing>  getSightseeing(@RequestParam(name = "tourCode", required = false) String tourCode, @RequestParam(name = "returnDate", required = false) String  returndate) {
 		final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		LocalDate returnDate = null;
-		if(returndate != null) returnDate = LocalDate.parse(returndate,DATE_FORMAT);
+		if(returndate != null) 
+		{
+			try{
+				returnDate = LocalDate.parse(returndate,DATE_FORMAT);
+			}	
+			catch (java.time.format.DateTimeParseException e) {
+				// TODO: handle exception
+				returnDate = null;
+			}
+		}
+		System.out.println(returnDate);
 		
-		
-//		if(returnDate!= null && tourCode !=null) return sightseeingService.findByTourCodeAndReturnDate(tourCode, returnDate);
-//		else if(returnDate!=null) return sightseeingService.findByReturnDate(returnDate);
-//		else if(tourCode!=null) return sightseeingService.findByTourCode(tourCode);
-//		else return sightseeingService.findAll();
-		if(tourCode!=null) return sightseeingService.findByTourCode(tourCode);
-		 return sightseeingService.findAll();
+		if(returnDate!= null && tourCode !=null) return sightseeingService.findByTourCodeAndReturnDate(tourCode, returnDate);
+		else if(returnDate!=null) return sightseeingService.findByReturnDate(returnDate);
+		else if(tourCode!=null) return sightseeingService.findByTourCode(tourCode);
+		else return sightseeingService.findAll();
 	}
 
 }

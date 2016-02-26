@@ -31,15 +31,6 @@ public class SightseeingServiceImpl implements SightseeingService {
 
 
 
-
-//	public List<Sightseeing> findByReturnDate(LocalDate returnDate) {
-//		// TODO Auto-generated method stub
-//		return sightseeingRepository.findByReturnDate(returnDate);
-//	}
-
-
-
-
 	public List<Sightseeing> findByTourCode(String tourCode) {
 		// TODO Auto-generated method stub
 		return sightseeingRepository.findByTourCode(tourCode);
@@ -47,11 +38,19 @@ public class SightseeingServiceImpl implements SightseeingService {
 
 
 
+	public List<Sightseeing> findByReturnDate(LocalDate returnDate) {
+		// TODO Auto-generated method stub
+		return sightseeingRepository.findByReturnDate(returnDate);
+	}
 
-//	public List<Sightseeing> findByTourCodeAndReturnDate(String tourCode,LocalDate returnDate) {
-//		// TODO Auto-generated method stub
-//		return sightseeingRepository.findByTourCodeAndReturnDate(tourCode, returnDate);
-//	}
+
+
+	public List<Sightseeing> findByTourCodeAndReturnDate(String tourCode,LocalDate returnDate) {
+		// TODO Auto-generated method stub
+		return sightseeingRepository.findByTourCodeAndReturnDate(tourCode, returnDate);
+	}
+
+
 
 
 

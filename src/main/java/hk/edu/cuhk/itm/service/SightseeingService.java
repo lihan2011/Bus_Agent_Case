@@ -15,6 +15,6 @@ import java.time.LocalDate;
 public interface SightseeingService {
 	List<Sightseeing> findAll();
 	List<Sightseeing> findByTourCode(String tourCode);
-	//List<Sightseeing> findByReturnDate(LocalDate returnDate);
-	//List<Sightseeing> findByTourCodeAndReturnDate(String tourCode, LocalDate returnDate);
+	List<Sightseeing> findByReturnDate(LocalDate returnDate);
+	List<Sightseeing> findByTourCodeAndReturnDate(String tourCode, LocalDate returnDate);
 }

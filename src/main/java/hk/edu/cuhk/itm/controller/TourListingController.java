@@ -28,8 +28,18 @@ public class TourListingController {
 	public List<TourListing> getTourListing(@RequestParam(name = "destination", required = false) String destination,@RequestParam(name = "departdate", required = false) String departdate){
 		final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		LocalDate departDate = null;
-		if(departdate != null) departDate = LocalDate.parse(departdate,DATE_FORMAT);
-
+		if(departdate != null) 
+		{
+			try{
+				departDate = LocalDate.parse(departdate,DATE_FORMAT);
+			}	
+			catch (java.time.format.DateTimeParseException e) {
+				// TODO: handle exception
+				departDate = null;
+			}
+		}
+		//System.out.println("length: "+destination.length());
+		if(destination == null||destination.isEmpty()) destination = null;
 		
 		if(destination != null&&departDate != null){
 			return tourListingService.findByDestinationAndDepartDate(destination, departDate);
