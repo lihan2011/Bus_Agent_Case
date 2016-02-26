@@ -32,6 +32,21 @@ public class UserInfoServiceImpl  implements UserInfoService{
 		// TODO Auto-generated method stub
 		return userInfoRepository.findByuserName(userName);
 	}
+
+	public UserInfo save(UserInfo userInfo) {
+		// TODO Auto-generated method stub
+		return userInfoRepository.save(userInfo);
+	}
+
+	public boolean exists(String userName) {
+		// TODO Auto-generated method stub
+		return userInfoRepository.exists(userName);
+	}
+
+	public UserInfo findOne(String userName) {
+		// TODO Auto-generated method stub
+		return userInfoRepository.findOne(userName);
+	}
 	
 
 }

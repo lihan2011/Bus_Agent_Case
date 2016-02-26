@@ -17,4 +17,7 @@ import org.springframework.data.repository.Repository;
 public interface UserInfoRepository extends Repository<UserInfo, String>{
 	List<UserInfo> findAll();
 	List<UserInfo> findByuserName(String userName);
+	UserInfo save(UserInfo userInfo);
+	boolean exists(String userName);
+	UserInfo findOne(String userName);
 }

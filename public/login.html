@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>login</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<p><span>username</span><input id="userName" type="text"/></p>
+		<p><span>password</span><input  id="passWord" type="text"/></p>
+		<p><input  id="login" type="button" value="login"></p>
+		<p><a href="http://localhost:8080/register.html">register here</a></p>
+	</div>
+<script type="text/javascript">
+$("#login").click(function() {
+			console.log("hello");
+			$.ajax({
+				type: "GET",
+				url: "http://localhost:8080/api/bus/login",
+				data:{
+					"userName":$("#userName").val(),
+					"passWord":$("#passWord").val()
+				},
+				success: function(msg){
+					if(msg)
+						window.location.href="http://localhost:8080/home.html?userName="+$("#userName").val(); 
+					else
+						alert("wrong userName or password");
+				},
+				error:function(err){
+					alert("inter problem  check your console please");
+				}
+			});
+		});
+	
+</script>
+</body>
+</html>

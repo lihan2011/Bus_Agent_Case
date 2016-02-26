@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>home</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+</head>
+<body>
+	<h1>hello <span id ="userName"></span></h1>
+	<ul>
+		<li><a href="http://localhost:8080/search.html">search page</a></li>
+		<li><a>about us</a></li>
+	</ul>
+	<script type="text/javascript">
+		function getQueryStringRegExp(name) 
+		{ 
+			var reg = new RegExp("(^|\\?|&)"+ name +"=([^&]*)(\\s|&|$)", "i"); 
+			if (reg.test(location.href)) return unescape(RegExp.$2.replace(/\+/g, " ")); return ""; 
+		}; 
+		$(document).ready(function(){
+  // 在这里写你的代码...
+  	$("#userName").append(getQueryStringRegExp('userName')); 
+});
+		
+	</script>
+</body>
+</html>

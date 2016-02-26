@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>register</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+</head>
+<body>
+	<div class="container">
+			<p><span>username</span><input id="userName" type="text"/></p>
+			<p><span>email</span><input id="eMail" type="text"/></p>
+			<p><span>password</span><input  id="passWord" type="text"/></p>
+			<p><span>tel</span><input id="telPhone" type="text"/></p>
+			<p><span>gender</span><input id="gender" type="text"/></p>
+			<p><input  id="submit" type="button" value="register"></p>
+	</div>
+	<script type="text/javascript">
+		$("#submit").click(function() {
+			var data = JSON.stringify({
+					"userName":$("#userName").val(),
+					"email":$("#eMail").val(),
+					"passWord":$("#passWord").val(),
+					"telephone":$("#telPhone").val(),
+					"gender":$("#gender").val()
+				});
+			$.ajax({
+				type: "POST",
+				url: "http://localhost:8080/api/bus/adduserinfo",
+				dataType:"html",
+				contentType: "application/json",
+				data:data,
+				success: function(msg){
+
+					if(!msg)
+						alert("register failure");
+						//console.log(msg);
+					//alert("msg"+msg);
+					else 
+						window.location.href="http://localhost:8080/home.html?userName="+$("#userName").val(); 
+						
+				},
+				error:function(err){
+					alert(err);
+				}
+			});
+		});
+	</script>
+
+</body>
+</html>

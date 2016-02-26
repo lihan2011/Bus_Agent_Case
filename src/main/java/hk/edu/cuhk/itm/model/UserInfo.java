@@ -17,8 +17,8 @@ import javax.persistence.Table;
 public class UserInfo implements Serializable {
 	@Id
 	private String userName;
-	private String passWord;
 	private String Email;
+	private String passWord;
 	private int telephone;
 	private String gender;
 	public String getUserName() {
